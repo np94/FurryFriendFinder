@@ -1,0 +1,20 @@
+.missing {
+  height: calc(100% - 60px);
+  padding-bottom: 70px;
+}
+
+.missing_title {
+  text-align: center;
+}
+
+.missing_info {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.missing_info > img {
+  text-align: center;
+}

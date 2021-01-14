@@ -1,0 +1,20 @@
+.NavBottom {
+  background-color: transparent;
+  color: #fffaf0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  align-items: center;
+  padding: 20px;
+  height: 70px;
+}
+
+.NavBottom .nav-list {
+  margin-left: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.NavBottom .nav-list li:not(:last-child) {
+  margin-right: 20px;
+}
