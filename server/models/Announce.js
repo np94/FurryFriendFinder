@@ -12,6 +12,7 @@ const announceSchema = new Schema({
   missing: Boolean,
   found: Boolean,
   comments: String,
+  id_user: String,
 });
 
 const Announce = mongoose.model("Announce", announceSchema);

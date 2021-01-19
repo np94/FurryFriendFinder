@@ -7,7 +7,7 @@ class Home extends React.Component {
       <div>
         <h1>Home Page </h1>
         
-        <button><NavLink to="/create">Missing</NavLink></button>
+        <button><NavLink to="/profile">Missing</NavLink></button>
         
       </div>
     );

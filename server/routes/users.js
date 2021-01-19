@@ -40,9 +40,9 @@ router.get("/me/announce", requireAuth, (req, res, next) => {
   const currentUserId = req.session.currentUser; // We retrieve the users id from the session.
 
   // And then get all the items matching the id_user field that matches the logged in users id.
-  Item.find({ id_user: currentUserId })
-    .then((itemDocuments) => {
-      res.status(200).json(itemDocuments);
+  Announce.find({ id_user: currentUserId })
+    .then((announceDocuments) => {
+      res.status(200).json(announceDocuments);
     })
     .catch(next);
 });

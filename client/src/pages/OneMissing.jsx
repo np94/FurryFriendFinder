@@ -13,7 +13,6 @@ class OneMissing extends Component {
         apiHandler
         .getOneAnnounce(announceId)
         .then((apiResponse) => {
-            console.log(apiResponse);
               this.setState({
                 announce: apiResponse,
               });

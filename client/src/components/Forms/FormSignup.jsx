@@ -8,8 +8,10 @@ class FormSignup extends Component {
   static contextType = UserContext;
 
   state = {
+    username: "",
     email: "",
     password: "",
+    phone_number: 0,
   };
 
   handleChange = (event) => {
@@ -34,20 +36,33 @@ class FormSignup extends Component {
 
   render() {
     if (this.context.user) {
-      return <Redirect to="/" />;
+      return <Redirect to="/profile" />;
     }
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="email">Email</label>
+        <div>
+        <label htmlFor="username">Username</label>
+        <input
+          onChange={this.handleChange}
+          value={this.state.username}
+          type="username"
+          id="username"
+          name="username"
+        />
+        </div>
+      <div>
+      <label htmlFor="email">Email</label>
         <input
           onChange={this.handleChange}
           value={this.state.email}
           type="email"
           id="email"
           name="email"
-        />
-        <label htmlFor="password">Password</label>
+          />
+      </div>
+       <div>
+       <label htmlFor="password">Password</label>
         <input
           onChange={this.handleChange}
           value={this.state.password}
@@ -55,6 +70,18 @@ class FormSignup extends Component {
           id="password"
           name="password"
         />
+       </div>
+        
+        <div>
+        <label htmlFor="phone_number">Phone number</label>
+        <input
+          onChange={this.handleChange}
+          value={this.state.phone_number}
+          type="phone_number"
+          id="phone_number"
+          name="phone_number"
+        />
+        </div> 
         <button>Submit</button>
       </form>
     );

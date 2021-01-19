@@ -12,6 +12,9 @@ import NavBottom from "./components/NavBottom";
 import OneMissing from "./pages/OneMissing";
 import OneFound from "./pages/OneFound";
 import NewReport from "./pages/NewReport";
+import FormEditAnnounce from "./components/Forms/FormEditAnnounce"
+import FormProfile from "./components/Forms/FormProfile";
+
 
 function App() {
   return (
@@ -26,7 +29,15 @@ function App() {
         <Route exact path="/found" component={Found} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
-        <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/profile" 
+        component={Profile}
+         />
+        <ProtectedRoute exact path="/profile/:id/edit" 
+        component={FormEditAnnounce}
+         />
+        <ProtectedRoute exact path="/profile/settings" 
+        component={FormProfile}
+         />
       </Switch>
       <NavBottom/>
     </div>

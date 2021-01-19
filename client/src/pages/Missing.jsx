@@ -26,14 +26,14 @@ class Missing extends Component {
         return (
             <div className="missing">
             <h2 className="missing_title">Missing page</h2>
-             {this.state.announces && this.state.announces.map((announce)=>{
+             {this.state.announces  && this.state.announces.map((announce) => {
                 if (announce.missing){
                     return (
                         <div className="missing_info" key={announce._id}>
                             <img
                           style={{
                             width: "100vw",
-                            height: "50vh",
+                            height: "",
                           }}
                           src={announce.image}
                           alt={announce.name}

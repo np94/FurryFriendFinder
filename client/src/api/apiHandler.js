@@ -64,4 +64,37 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+  updateAnnounce(announceId, data) {
+    return service
+      .patch(`/api/announce/${announceId}`, data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  updateUser(data) {
+    return service
+      .patch("/api/users/me", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUserAnnounce() {
+    return service
+      .get("/api/users/me/announce")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  removeAnnounce(announceId) {
+    return service
+      .delete(`/api/announce/${announceId}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  getUserInfos() {
+    return service
+      .get("/api/users/me")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };

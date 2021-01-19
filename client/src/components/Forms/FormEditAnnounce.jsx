@@ -1,62 +1,85 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
 import apiHandler from '../../api/apiHandler';
-
 import UserContext from "../Auth/UserContext";
+import { buildFormData } from "../../utils";
 
 
-class FormAnnouncement extends Component {
+class FormEditAnnounce extends Component {
     static contextType = UserContext;
     state = {
-            title: "",
-            name: "",
-            location: "",
-            email: "",
-            image: "",
-            description: "",
-            pet_type: "",
-            missing: true,
-            comments: "",
+        title: "",
+        name: "",
+        location: "",
+        email: "",
+        description: "",
+        image:"",
+        missing: true,
+        pet_type:"",
+        comments:"",
     };
-    
-    imageRef = React.createRef();
-   
-  handleChange = (event) => {
-    const value = event.target.value;
-    const key = event.target.name;
-    this.setState({ [key]: value });
-  };
 
-    
+    imageRef = React.createRef();
+
+    componentDidMount() {
+        const announceId = this.props.match.params.id;
+        apiHandler
+          .getOneAnnounce(announceId)
+          .then((apiResponse) => {
+            console.log(apiResponse)
+            this.setState({
+               announce: apiResponse
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+      handleChange = (event) => {
+        const value = event.target.value;
+        const key = event.target.name;
+        this.setState({ [key]: value });
+      };
+
+
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state)
-
         const fd = new FormData();
-
-        for (let key in this.state) {
-            fd.append(key, this.state[key]);
-        }
+        const { httpResponse, ...data } = this.state;
+        buildFormData(fd, data)
 
         fd.append("image", this.imageRef.current.files[0]);
 
+        const announceId = this.props.match.params.id;
+
         apiHandler
-          .addAnnounce(fd, {
-            title: this.state.title,
-            name: this.state.name,
-            location: this.state.location,
-            email: this.state.email,
-            image: this.state.image,
-            description: this.state.description,
-            pet_type:this.state.pet_type,
-            missing:this.state.missing,
-            comments:this.state.comments,
-          })
+          .updateAnnounce(announceId, fd)
           .then((data) => {
             this.props.history.push("/profile");
-
-          });
+            this.setState({
+                httpResponse: {
+                  status: "success",
+                  message: "Item successfully added.",
+                },
+              });
+              this.timeoutId = setTimeout(() => {
+                this.setState({ httpResponse: null });
+              }, 1000);
+            })
+            .catch((error) => {
+              this.setState({
+                httpResponse: {
+                  status: "failure",
+                  message: "An error occured, try again later.",
+                },
+              });
+              this.timeoutId = setTimeout(() => {
+                this.setState({ httpResponse: null });
+              }, 1000);
+            });
+      
       };
+    
 
     render() {
         return (
@@ -151,7 +174,7 @@ class FormAnnouncement extends Component {
             <button>Submit !</button>
           </form>
         );
-    }
-}
+    };
+};
 
-export default withRouter(FormAnnouncement);
+export default FormEditAnnounce;
