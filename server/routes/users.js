@@ -11,14 +11,15 @@ router.patch(
   upload.single("profileImg"),
   (req, res, next) => {
     const userId = req.session.currentUser;
-
     // If no file is sent, req.file is undefined, leading to an error when trying to
     // acces req.file.path (undefined.path) => Cannot read property path of undefined.
     if (req.file) {
-      req.body.profileImg = req.file.path; // Add profileImage key to req.body
+      req.body.user.profileImg = req.file.path; // Add profileImage key to req.body
     }
 
-    User.findByIdAndUpdate(userId, req.body, { new: true })
+    console.log(req.body.user);
+
+    User.findByIdAndUpdate(userId, req.body.user, { new: true })
       .select("-password") // Remove the password field from the found document.
       .then((userDocument) => {
         res.status(200).json(userDocument);

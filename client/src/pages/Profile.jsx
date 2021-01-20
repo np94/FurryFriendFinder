@@ -59,22 +59,27 @@ class Profile extends Component {
     if (!user) return null;
     return (
       <section className="Profile">
-
-        
         <div className="user-presentation">
           <h2 className="title">
             {user.username}
           </h2>
-          <button><NavLink to="/create">Report Missing</NavLink></button>
 
-          <button><Link className="link" to="/profile/settings">Edit profile</Link></button>
         </div>
 
+        <div className="user-image">
+          <img src={user.profileImg} alt={user.profileImg} style={{width: 100, height: 100}} />
+        </div>
+        <div className="user-image">
+          <h2 className="title">
+            {user.username} {user.email} {user.phone_number}
+          </h2>
+          <button><Link className="link" to="/profile/settings">Edit profile</Link></button>
+          <button><NavLink to="/create">Report Missing</NavLink></button>
+        </div>
           
-          <div className="FormAnnouncement">
+          <div className="missing">
             <h3>Your announcements</h3>
             {this.state.userAnnounces  && this.state.userAnnounces.map((announce) => {
-                if (announce.missing){
                     return (
                         <div className="missing_info" 
                         key={announce._id}   
@@ -91,7 +96,7 @@ class Profile extends Component {
                           <h2>{announce.title}</h2>
                         </Link>
                         <h3>{announce.name}</h3>
-                        <h3>{announce.location}</h3>
+                        <h3>{announce.formattedAddress}</h3>
                         <h3>{announce.pet_type}</h3>
                         <h3>{announce.description}</h3>
                         <Link to={`/profile/${announce._id}/edit`}>
@@ -103,29 +108,12 @@ class Profile extends Component {
                         
                       </div>
                     )}
-               
-            
-            })}
+            )}
           </div>
-        
-
-          <React.Fragment>
-            <div className="">
-              <img src="" alt="" />
-            </div>
-            <p>You don't have anything to report</p>
-          </React.Fragment>
-        
-        
-        
       </section>
     );
-  
-     
-      
   }
 }
-
 
 
 export default withUser(Profile);

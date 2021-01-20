@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import apiHandler from '../../api/apiHandler';
-
+import AutoComplete from "../AutoComplete";
 import UserContext from "../Auth/UserContext";
 
 
@@ -10,12 +10,14 @@ class FormAnnouncement extends Component {
     state = {
             title: "",
             name: "",
-            location: "",
+            location: {
+              coordinates: [],
+            },
             email: "",
             image: "",
             description: "",
             pet_type: "",
-            missing: true,
+            status:"",
             comments: "",
     };
     
@@ -49,13 +51,18 @@ class FormAnnouncement extends Component {
             image: this.state.image,
             description: this.state.description,
             pet_type:this.state.pet_type,
-            missing:this.state.missing,
+            status:this.state.status,
             comments:this.state.comments,
           })
           .then((data) => {
             this.props.history.push("/profile");
 
           });
+      };
+
+      handlePlace = (place) => {
+        const location = place.geometry;
+        this.setState({ location, formattedAddress: place.place_name });
       };
 
     render() {
@@ -82,16 +89,12 @@ class FormAnnouncement extends Component {
               type="text"
             />
           </div>
-            <div>
-            <label htmlFor="location">Location</label>
-            <input
-              onChange={this.handleChange}
-              value={this.state.location}
-              id="location"
-              name="location"
-              type="text"
-            />
-            </div>
+          <div className="form-group">
+            <label className="label" htmlFor="location">
+              Address
+            </label>
+            <AutoComplete onSelect={this.handlePlace} />
+          </div>
             <div>
             <label htmlFor="email">E-mail</label>
             <input
@@ -102,6 +105,23 @@ class FormAnnouncement extends Component {
               type="text"
             />
             </div>
+            <div className="form-group">
+            <label className="label" htmlFor="status">
+              Status
+            </label>
+            <select
+              name="status"
+              id="status"
+              onChange={this.handleChange}
+              value={this.state.status}
+            >
+              <option value="" disabled>
+                Select a status
+              </option>
+              <option value="Missing">Missing</option>
+              <option value="Found">Found</option>
+            </select>
+          </div>
             <div>
             <label htmlFor="description">Description</label>
             <input

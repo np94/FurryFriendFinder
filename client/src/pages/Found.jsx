@@ -11,7 +11,6 @@ class Found extends Component {
         apiHandler
         .getAnnounce()
         .then((responseFromApi) => {
-          console.log(responseFromApi);
           this.setState({
             announces: responseFromApi
           });
@@ -24,10 +23,10 @@ class Found extends Component {
 
     render() {
         return (
-            <div>
+            <div className="missing">
             <h2>Found page</h2>
              {this.state.announces.map((announce)=>{
-                if (announce.found){
+                 if (announce.status[0] === "Found"){
                     return (
                         <div key={announce._id}>
                             <img
@@ -42,7 +41,7 @@ class Found extends Component {
                           <h2>{announce.title}</h2>
                         </Link>
                         <h3>{announce.name}</h3>
-                        <h3>{announce.location}</h3>
+                        <h3>{announce.location.coordinates}</h3>
                         <h3>{announce.pet_type}</h3>
                         <h3>{announce.description}</h3>
         

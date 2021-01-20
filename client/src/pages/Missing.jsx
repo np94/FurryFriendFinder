@@ -23,11 +23,12 @@ class Missing extends Component {
     
 
     render() {
+      
         return (
             <div className="missing">
             <h2 className="missing_title">Missing page</h2>
              {this.state.announces  && this.state.announces.map((announce) => {
-                if (announce.missing){
+                if (announce.status[0] === "Missing"){
                     return (
                         <div className="missing_info" key={announce._id}>
                             <img
@@ -42,12 +43,13 @@ class Missing extends Component {
                           <h2>{announce.title}</h2>
                         </Link>
                         <h3>{announce.name}</h3>
-                        <h3>{announce.location}</h3>
+                        <h3>{announce.location.coordinates}</h3>
                         <h3>{announce.pet_type}</h3>
                         <h3>{announce.description}</h3>
         
                       </div>
-                    )}
+                    )
+                  }
                
             
             })}

@@ -13,7 +13,7 @@ const announce = [
       "https://res.cloudinary.com/dqlkhve6f/image/upload/v1610619336/FFF/IMG-20200925-WA0011_elmdli.jpg",
     description: "White grey-ish dog, a little overweight",
     pet_type: "Pugs",
-    missing: "true",
+    status: "Missing",
     comments:
       "Went for a walk with him yesterday, lost in the woods-bois de boulogne at 10am",
   },
@@ -26,7 +26,7 @@ const announce = [
       "https://res.cloudinary.com/dqlkhve6f/image/upload/v1610619329/FFF/17465969605906809960_d8kdag.jpg",
     description: "Grey and white, pretty eyes",
     pet_type: "Angora and british short hair mix",
-    missing: "true",
+    status: "Missing",
     comments: "Did not come home for a week",
   },
 
@@ -39,7 +39,7 @@ const announce = [
       "https://res.cloudinary.com/dqlkhve6f/image/upload/v1610637777/FFF/16106371573047864249374219884166_d0dj1m.jpg",
     description: "Brown and white, very playful and active dog",
     pet_type: "Sheba",
-    found: "true",
+    status: "Found",
     comments: "Found it playing alone infront of my appartement building",
   },
 ];

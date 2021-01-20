@@ -13,7 +13,10 @@ class FormEditAnnounce extends Component {
         email: "",
         description: "",
         image:"",
-        missing: true,
+        location: {
+          coordinates: [],
+        },
+        status:"",
         pet_type:"",
         comments:"",
     };
@@ -109,7 +112,7 @@ class FormEditAnnounce extends Component {
             <label htmlFor="location">Location</label>
             <input
               onChange={this.handleChange}
-              value={this.state.location}
+              value={this.state.location.coordinates}
               id="location"
               name="location"
               type="text"
@@ -124,6 +127,23 @@ class FormEditAnnounce extends Component {
               name="email"
               type="text"
             />
+            <div className="form-group">
+            <label className="label" htmlFor="status">
+              Status
+            </label>
+            <select
+              name="status"
+              id="status"
+              onChange={this.handleChange}
+              value={this.state.status}
+            >
+              <option value="" disabled>
+                Select a status
+              </option>
+              <option value="Missing">Missing</option>
+              <option value="Found">Found</option>
+            </select>
+          </div>
             </div>
             <div>
             <label htmlFor="description">Description</label>

@@ -1,7 +1,10 @@
 .NavMain {
   background-color: transparent;
   color: #fffaf0;
-  display: flex;
+  left: 0;
+  right: 0;
+  position: sticky;
+  z-index: 2;
   align-items: center;
   padding: 20px;
   height: 70px;

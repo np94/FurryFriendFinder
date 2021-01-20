@@ -33,7 +33,7 @@ class OneFound extends Component {
             <img src={this.state.announce.image} alt="bob"/>
             <h2>{this.state.announce.title}</h2>
             <h3>{this.state.announce.name}</h3>
-            <h4>{this.state.announce.location}</h4>
+            <h4>{this.state.announce.formattedAddress}</h4>
             <p>{this.state.announce.email}</p>
             <p>{this.state.announce.description}</p>
             <p>{this.state.announce.pet_type}</p>

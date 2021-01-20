@@ -4,14 +4,27 @@ const Schema = mongoose.Schema;
 const announceSchema = new Schema({
   title: String,
   name: String,
-  location: String,
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+    },
+    coordinates: {
+      type: [Number],
+    },
+  },
   email: String,
   image: String,
   description: String,
   pet_type: String,
-  missing: Boolean,
-  found: Boolean,
+  status: [
+    {
+      type: String,
+      enum: ["Missing", "Found"],
+    },
+  ],
   comments: String,
+  formattedAddress: String,
   id_user: String,
 });
 

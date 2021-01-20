@@ -58,10 +58,9 @@ class FormProfile extends Component {
 
     fd.append("profileImg", this.imageRef.current.files[0]);
     
-    const userId = this.props.match.params.id;
 
     apiHandler
-      .updateUser(userId, fd)
+      .updateUser(fd)
       .then((data) => {
         this.props.history.push("/profile");
         this.setState({
@@ -70,7 +69,7 @@ class FormProfile extends Component {
             message: "Profile successfully updated.",
           },
         });
-
+        this.context.setUser(data);
         this.timeoutId = setTimeout(() => {
           this.setState({ httpResponse: null });
         }, 2000);
@@ -91,17 +90,16 @@ class FormProfile extends Component {
   };
 
   render() {
-
     return (
         <div className="missing">
         <form className="form" onSubmit={this.handleSubmit}>
           <h1 className="header">Edit profile</h1>
+          <img style={{width: 100, height: 100}} src={this.state.user.profileImg} alt="animal"/>
           <label className="label" htmlFor="image">
-            Profile image</label>
+            </label>
             <input
               ref={this.imageRef}
               onChange={this.handleChange}
-              value={this.state.user.profilImg}
               id="profilImg"
               name="profilImg"
               type="file"
@@ -118,7 +116,6 @@ class FormProfile extends Component {
               name="username"
               onChange={this.handleChange}
               value={this.state.user.username}
-
             />
             {!this.isValidInput("username") && (
               <p className="input-error">Invalid input</p>
@@ -135,7 +132,7 @@ class FormProfile extends Component {
               type="text"
               name="password"
               onChange={this.handleChange}
-              value={this.state.user.password}
+              value={this.state.user.password || ""}
               
             />
             {!this.isValidInput("password") && (
